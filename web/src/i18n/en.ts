@@ -55,7 +55,7 @@ export const en: Translations = {
   },
 
   app: {
-    brand: "Hermes Agent",
+    brand: "HYDBA AI",
     brandShort: "HA",
     closeNavigation: "Close navigation",
     closeModelTools: "Close model and tools",
