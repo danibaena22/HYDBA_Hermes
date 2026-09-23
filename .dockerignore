@@ -112,3 +112,6 @@ plans/
 /*.png.bak
 *.tar.gz
 *.tgz
+
+# Frontend build output - generated inside Docker
+hermes_cli/web_dist
