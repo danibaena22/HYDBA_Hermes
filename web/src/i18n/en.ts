@@ -55,7 +55,7 @@ export const en: Translations = {
   },
 
   app: {
-    brand: "HYDBA AI",
+    brand: "HYDBA AI 2",
     brandShort: "HA",
     closeNavigation: "Close navigation",
     closeModelTools: "Close model and tools",

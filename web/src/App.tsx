@@ -512,322 +512,322 @@ export default function App() {
 
   return (
     <ProfileProvider>
-    <div
-      data-layout-variant={layoutVariant}
-      className="flex h-dvh max-h-dvh min-h-0 flex-col overflow-hidden bg-background-base text-text-primary antialiased"
-    >
-      <SelectionSwitcher />
-
       <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-0"
+        data-layout-variant={layoutVariant}
+        className="flex h-dvh max-h-dvh min-h-0 flex-col overflow-hidden bg-background-base text-text-primary antialiased"
       >
-        <PluginSlot name="backdrop" />
-      </div>
+        <SelectionSwitcher />
 
-      <header
-        className={cn(
-          "lg:hidden fixed top-0 left-0 right-0 z-40 min-h-14",
-          "flex items-center gap-2 px-4 py-2",
-          "border-b border-current/20",
-          "bg-background-base",
-        )}
-        style={{
-          background:
-            "var(--component-header-background, var(--background-base))",
-          borderImage: "var(--component-header-border-image)",
-          clipPath: "var(--component-header-clip-path)",
-        }}
-      >
-        <Button
-          ghost
-          size="icon"
-          onClick={() => setMobileOpen(true)}
-          aria-label={t.app.openNavigation}
-          aria-expanded={mobileOpen}
-          aria-controls="app-sidebar"
-          className="text-text-secondary hover:text-midground"
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-0"
         >
-          <Menu />
-        </Button>
+          <PluginSlot name="backdrop" />
+        </div>
 
-        <Typography className="font-bold text-[0.95rem] leading-[0.95] tracking-[0.05em] text-midground">
-          {t.app.brand}
-        </Typography>
-      </header>
-
-      {mobileOpen && (
-        <Button
-          ghost
-          aria-label={t.app.closeNavigation}
-          onClick={closeMobile}
+        <header
           className={cn(
-            "lg:hidden fixed inset-0 z-40 p-0 block",
-            "bg-black/70",
+            "lg:hidden fixed top-0 left-0 right-0 z-40 min-h-14",
+            "flex items-center gap-2 px-4 py-2",
+            "border-b border-current/20",
+            "bg-background-base",
           )}
-        />
-      )}
+          style={{
+            background:
+              "var(--component-header-background, var(--background-base))",
+            borderImage: "var(--component-header-border-image)",
+            clipPath: "var(--component-header-clip-path)",
+          }}
+        >
+          <Button
+            ghost
+            size="icon"
+            onClick={() => setMobileOpen(true)}
+            aria-label={t.app.openNavigation}
+            aria-expanded={mobileOpen}
+            aria-controls="app-sidebar"
+            className="text-text-secondary hover:text-midground"
+          >
+            <Menu />
+          </Button>
 
-      {/* Single mobile header clearance for the banner stack + content. The
+          <Typography className="font-bold text-[0.95rem] leading-[0.95] tracking-[0.05em] text-midground">
+            {t.app.brand}
+          </Typography>
+        </header>
+
+        {mobileOpen && (
+          <Button
+            ghost
+            aria-label={t.app.closeNavigation}
+            onClick={closeMobile}
+            className={cn(
+              "lg:hidden fixed inset-0 z-40 p-0 block",
+              "bg-black/70",
+            )}
+          />
+        )}
+
+        {/* Single mobile header clearance for the banner stack + content. The
           fixed lg:hidden header is h-14/z-40; previously each banner carried
           its own mt-14 AND the content kept pt-14, so two visible banners
           stacked three offsets (NS-656 review P3). One spacer, applied once. */}
-      <div aria-hidden className="h-14 shrink-0 lg:hidden" />
-      <PluginSlot name="header-banner" />
-      <ProfileScopeBanner />
-      <MemoryPressureBanner status={sidebarStatus} />
+        <div aria-hidden className="h-14 shrink-0 lg:hidden" />
+        <PluginSlot name="header-banner" />
+        <ProfileScopeBanner />
+        <MemoryPressureBanner status={sidebarStatus} />
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-        <div className="flex min-h-0 min-w-0 flex-1">
-          <aside
-            id="app-sidebar"
-            aria-label={t.app.navigation}
-            className={cn(
-              "fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-64 min-h-0 flex-col font-sans",
-              "border-r border-current/20",
-              "bg-background-base",
-              "transition-[transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-              mobileOpen ? "translate-x-0" : "-translate-x-full",
-              "lg:sticky lg:top-0 lg:translate-x-0 lg:shrink-0 lg:overflow-hidden",
-              "lg:transition-[width] lg:duration-300 lg:ease-[cubic-bezier(0.23,1,0.32,1)]",
-              collapsed && "lg:w-14",
-            )}
-            style={{
-              background:
-                "var(--component-sidebar-background, var(--background-base))",
-              clipPath: "var(--component-sidebar-clip-path)",
-              borderImage: "var(--component-sidebar-border-image)",
-            }}
-          >
-            <div
-              className={cn(
-                "flex h-14 shrink-0 items-center gap-2",
-                "border-b border-current/20",
-                collapsed ? "lg:justify-center lg:px-0" : "px-4 justify-between",
-              )}
-            >
-              <div
-                className={cn(
-                  "flex items-center gap-2",
-                  collapsed && "lg:hidden",
-                )}
-              >
-                <PluginSlot name="header-left" />
-
-                <Typography className="font-bold text-[1.125rem] leading-[0.95] tracking-[0.0525rem] text-midground uppercase">
-                  HYDBA
-                  <br />
-                  AI
-                </Typography>
-              </div>
-
-              <Button
-                ghost
-                size="icon"
-                onClick={closeMobile}
-                aria-label={t.app.closeNavigation}
-                className="lg:hidden text-text-secondary hover:text-midground"
-              >
-                <X />
-              </Button>
-
-              <Button
-                ghost
-                size="icon"
-                onClick={toggleCollapsed}
-                aria-label={
-                  collapsed ? t.common.expand : t.common.collapse
-                }
-                className="hidden lg:flex text-text-secondary hover:text-midground"
-              >
-                {collapsed ? (
-                  <PanelLeftOpen className="h-4 w-4" />
-                ) : (
-                  <PanelLeftClose className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-
-            <ProfileSwitcher collapsed={isDesktopCollapsed} />
-
-            <nav
-              className="min-h-0 w-full flex-1 overflow-y-auto overflow-x-hidden border-t border-current/10 py-2"
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+          <div className="flex min-h-0 min-w-0 flex-1">
+            <aside
+              id="app-sidebar"
               aria-label={t.app.navigation}
+              className={cn(
+                "fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-64 min-h-0 flex-col font-sans",
+                "border-r border-current/20",
+                "bg-background-base",
+                "transition-[transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                mobileOpen ? "translate-x-0" : "-translate-x-full",
+                "lg:sticky lg:top-0 lg:translate-x-0 lg:shrink-0 lg:overflow-hidden",
+                "lg:transition-[width] lg:duration-300 lg:ease-[cubic-bezier(0.23,1,0.32,1)]",
+                collapsed && "lg:w-14",
+              )}
+              style={{
+                background:
+                  "var(--component-sidebar-background, var(--background-base))",
+                clipPath: "var(--component-sidebar-clip-path)",
+                borderImage: "var(--component-sidebar-border-image)",
+              }}
             >
-              <ul className="flex flex-col">
-                {sidebarNav.coreItems.map((item) => (
-                  <SidebarNavLink
-                    closeMobile={closeMobile}
-                    collapsed={isDesktopCollapsed}
-                    item={item}
-                    key={item.path}
-                    t={t}
-                    tooltipWarmRef={tooltipWarmRef}
-                  />
-                ))}
-              </ul>
-
-              {sidebarNav.pluginItems.length > 0 && (
+              <div
+                className={cn(
+                  "flex h-14 shrink-0 items-center gap-2",
+                  "border-b border-current/20",
+                  collapsed ? "lg:justify-center lg:px-0" : "px-4 justify-between",
+                )}
+              >
                 <div
-                  aria-labelledby="hermes-sidebar-plugin-nav-heading"
-                  className="flex flex-col border-t border-current/10 pb-2"
-                  role="group"
+                  className={cn(
+                    "flex items-center gap-2",
+                    collapsed && "lg:hidden",
+                  )}
                 >
-                  <span
-                    className={cn(
-                      "px-5 pt-2.5 pb-1",
-                      "font-sans text-display text-xs tracking-[0.12em] text-text-tertiary",
-                      isDesktopCollapsed && "lg:hidden",
-                    )}
-                    id="hermes-sidebar-plugin-nav-heading"
-                  >
-                    {t.app.pluginNavSection}
-                  </span>
+                  <PluginSlot name="header-left" />
 
-                  <ul className="flex flex-col">
-                    {sidebarNav.pluginItems.map((item) => (
-                      <SidebarNavLink
-                        closeMobile={closeMobile}
-                        collapsed={isDesktopCollapsed}
-                        item={item}
-                        key={item.path}
-                        t={t}
-                        tooltipWarmRef={tooltipWarmRef}
-                      />
-                    ))}
-                  </ul>
+                  <Typography className="font-bold text-[1.125rem] leading-[0.95] tracking-[0.0525rem] text-midground uppercase">
+                    HYDBA
+                    <br />
+                    AI 2
+                  </Typography>
                 </div>
-              )}
-            </nav>
 
-            <SidebarSystemActions
-              collapsed={isDesktopCollapsed}
-              onNavigate={closeMobile}
-              status={sidebarStatus}
-              tooltipWarmRef={tooltipWarmRef}
-            />
-
-            <div
-              className={cn(
-                "flex shrink-0 items-center gap-2",
-                "px-3 py-2",
-                "border-t border-current/20",
-                isDesktopCollapsed
-                  ? "lg:flex-col lg:items-start lg:gap-3 lg:py-3"
-                  : "justify-between",
-              )}
-            >
-              <div
-                className={cn(
-                  "flex min-w-0 items-center gap-2",
-                  isDesktopCollapsed && "lg:flex-col lg:items-start",
-                )}
-              >
-                <PluginSlot name="header-right" />
-
-                <SidebarIconWithTooltip
-                  collapsed={isDesktopCollapsed}
-                  label={t.theme?.switchTheme ?? "Switch theme"}
-                  tooltipWarmRef={tooltipWarmRef}
+                <Button
+                  ghost
+                  size="icon"
+                  onClick={closeMobile}
+                  aria-label={t.app.closeNavigation}
+                  className="lg:hidden text-text-secondary hover:text-midground"
                 >
-                  <ThemeSwitcher collapsed={isDesktopCollapsed} dropUp />
-                </SidebarIconWithTooltip>
+                  <X />
+                </Button>
 
-                <SidebarIconWithTooltip
-                  collapsed={isDesktopCollapsed}
-                  label={t.language.switchTo}
-                  tooltipWarmRef={tooltipWarmRef}
+                <Button
+                  ghost
+                  size="icon"
+                  onClick={toggleCollapsed}
+                  aria-label={
+                    collapsed ? t.common.expand : t.common.collapse
+                  }
+                  className="hidden lg:flex text-text-secondary hover:text-midground"
                 >
-                  <LanguageSwitcher collapsed={isDesktopCollapsed} dropUp />
-                </SidebarIconWithTooltip>
+                  {collapsed ? (
+                    <PanelLeftOpen className="h-4 w-4" />
+                  ) : (
+                    <PanelLeftClose className="h-4 w-4" />
+                  )}
+                </Button>
               </div>
-            </div>
 
-            <div
-              className={cn(
-                "flex shrink-0 flex-col",
-                isDesktopCollapsed && "lg:hidden",
-              )}
-            >
-              <AuthWidget />
-              <SidebarFooter status={sidebarStatus} />
-            </div>
-          </aside>
+              <ProfileSwitcher collapsed={isDesktopCollapsed} />
 
-          <PageHeaderProvider pluginTabs={pluginTabMeta}>
-            <div
-              className={cn(
-                "relative z-2 flex min-w-0 min-h-0 flex-1 flex-col",
-                "px-3 sm:px-6",
-                isChatRoute
-                  ? "pb-0 pt-1 sm:pt-2 lg:pt-4"
-                  : "pt-2 sm:pt-4 lg:pt-6",
-                isDocsRoute && "min-h-0 flex-1",
-              )}
-            >
-              <PluginSlot name="pre-main" />
-              <div
-                className={cn(
-                  "w-full min-w-0",
-                  !isChatRoute &&
-                    "pb-[calc(2rem+env(safe-area-inset-bottom,0px))] lg:pb-8",
-                  (isDocsRoute || isChatRoute) &&
-                    "min-h-0 flex flex-1 flex-col",
-                )}
+              <nav
+                className="min-h-0 w-full flex-1 overflow-y-auto overflow-x-hidden border-t border-current/10 py-2"
+                aria-label={t.app.navigation}
               >
-                <ProfileKeyedRoutes>
-                  <Suspense fallback={<RouteFallback />}>
-                    <Routes>
-                      {routes.map(({ key, path, element }) => (
-                        <Route key={key} path={path} element={element} />
-                      ))}
-                      <Route
-                        path="*"
-                        element={
-                          <UnknownRouteFallback pluginsLoading={pluginsLoading} />
-                        }
-                      />
-                    </Routes>
-                  </Suspense>
-                </ProfileKeyedRoutes>
+                <ul className="flex flex-col">
+                  {sidebarNav.coreItems.map((item) => (
+                    <SidebarNavLink
+                      closeMobile={closeMobile}
+                      collapsed={isDesktopCollapsed}
+                      item={item}
+                      key={item.path}
+                      t={t}
+                      tooltipWarmRef={tooltipWarmRef}
+                    />
+                  ))}
+                </ul>
 
-                {embeddedChat &&
-                  !chatOverriddenByPlugin &&
-                  (pluginsLoading ? (
-                    isChatRoute ? (
-                      <RouteFallback label="Loading chat…" />
-                    ) : null
-                  ) : chatHostMounted ? (
-                    <div
-                      data-chat-active={isChatRoute ? "true" : "false"}
+                {sidebarNav.pluginItems.length > 0 && (
+                  <div
+                    aria-labelledby="hermes-sidebar-plugin-nav-heading"
+                    className="flex flex-col border-t border-current/10 pb-2"
+                    role="group"
+                  >
+                    <span
                       className={cn(
-                        "min-h-0 min-w-0",
-                        isChatRoute ? "flex flex-1 flex-col" : "hidden",
+                        "px-5 pt-2.5 pb-1",
+                        "font-sans text-display text-xs tracking-[0.12em] text-text-tertiary",
+                        isDesktopCollapsed && "lg:hidden",
                       )}
-                      aria-hidden={!isChatRoute}
+                      id="hermes-sidebar-plugin-nav-heading"
                     >
-                      <Suspense
-                        fallback={
-                          isChatRoute ? (
-                            <RouteFallback label="Loading chat…" />
-                          ) : null
-                        }
-                      >
-                        <ChatPage isActive={isChatRoute} />
-                      </Suspense>
-                    </div>
-                  ) : isChatRoute ? (
-                    <RouteFallback label="Loading chat…" />
-                  ) : null)}
-              </div>
-              <PluginSlot name="post-main" />
-            </div>
-          </PageHeaderProvider>
-        </div>
-      </div>
+                      {t.app.pluginNavSection}
+                    </span>
 
-      <PluginSlot name="overlay" />
-    </div>
+                    <ul className="flex flex-col">
+                      {sidebarNav.pluginItems.map((item) => (
+                        <SidebarNavLink
+                          closeMobile={closeMobile}
+                          collapsed={isDesktopCollapsed}
+                          item={item}
+                          key={item.path}
+                          t={t}
+                          tooltipWarmRef={tooltipWarmRef}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </nav>
+
+              <SidebarSystemActions
+                collapsed={isDesktopCollapsed}
+                onNavigate={closeMobile}
+                status={sidebarStatus}
+                tooltipWarmRef={tooltipWarmRef}
+              />
+
+              <div
+                className={cn(
+                  "flex shrink-0 items-center gap-2",
+                  "px-3 py-2",
+                  "border-t border-current/20",
+                  isDesktopCollapsed
+                    ? "lg:flex-col lg:items-start lg:gap-3 lg:py-3"
+                    : "justify-between",
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex min-w-0 items-center gap-2",
+                    isDesktopCollapsed && "lg:flex-col lg:items-start",
+                  )}
+                >
+                  <PluginSlot name="header-right" />
+
+                  <SidebarIconWithTooltip
+                    collapsed={isDesktopCollapsed}
+                    label={t.theme?.switchTheme ?? "Switch theme"}
+                    tooltipWarmRef={tooltipWarmRef}
+                  >
+                    <ThemeSwitcher collapsed={isDesktopCollapsed} dropUp />
+                  </SidebarIconWithTooltip>
+
+                  <SidebarIconWithTooltip
+                    collapsed={isDesktopCollapsed}
+                    label={t.language.switchTo}
+                    tooltipWarmRef={tooltipWarmRef}
+                  >
+                    <LanguageSwitcher collapsed={isDesktopCollapsed} dropUp />
+                  </SidebarIconWithTooltip>
+                </div>
+              </div>
+
+              <div
+                className={cn(
+                  "flex shrink-0 flex-col",
+                  isDesktopCollapsed && "lg:hidden",
+                )}
+              >
+                <AuthWidget />
+                <SidebarFooter status={sidebarStatus} />
+              </div>
+            </aside>
+
+            <PageHeaderProvider pluginTabs={pluginTabMeta}>
+              <div
+                className={cn(
+                  "relative z-2 flex min-w-0 min-h-0 flex-1 flex-col",
+                  "px-3 sm:px-6",
+                  isChatRoute
+                    ? "pb-0 pt-1 sm:pt-2 lg:pt-4"
+                    : "pt-2 sm:pt-4 lg:pt-6",
+                  isDocsRoute && "min-h-0 flex-1",
+                )}
+              >
+                <PluginSlot name="pre-main" />
+                <div
+                  className={cn(
+                    "w-full min-w-0",
+                    !isChatRoute &&
+                    "pb-[calc(2rem+env(safe-area-inset-bottom,0px))] lg:pb-8",
+                    (isDocsRoute || isChatRoute) &&
+                    "min-h-0 flex flex-1 flex-col",
+                  )}
+                >
+                  <ProfileKeyedRoutes>
+                    <Suspense fallback={<RouteFallback />}>
+                      <Routes>
+                        {routes.map(({ key, path, element }) => (
+                          <Route key={key} path={path} element={element} />
+                        ))}
+                        <Route
+                          path="*"
+                          element={
+                            <UnknownRouteFallback pluginsLoading={pluginsLoading} />
+                          }
+                        />
+                      </Routes>
+                    </Suspense>
+                  </ProfileKeyedRoutes>
+
+                  {embeddedChat &&
+                    !chatOverriddenByPlugin &&
+                    (pluginsLoading ? (
+                      isChatRoute ? (
+                        <RouteFallback label="Loading chat…" />
+                      ) : null
+                    ) : chatHostMounted ? (
+                      <div
+                        data-chat-active={isChatRoute ? "true" : "false"}
+                        className={cn(
+                          "min-h-0 min-w-0",
+                          isChatRoute ? "flex flex-1 flex-col" : "hidden",
+                        )}
+                        aria-hidden={!isChatRoute}
+                      >
+                        <Suspense
+                          fallback={
+                            isChatRoute ? (
+                              <RouteFallback label="Loading chat…" />
+                            ) : null
+                          }
+                        >
+                          <ChatPage isActive={isChatRoute} />
+                        </Suspense>
+                      </div>
+                    ) : isChatRoute ? (
+                      <RouteFallback label="Loading chat…" />
+                    ) : null)}
+                </div>
+                <PluginSlot name="post-main" />
+              </div>
+            </PageHeaderProvider>
+          </div>
+        </div>
+
+        <PluginSlot name="overlay" />
+      </div>
     </ProfileProvider>
   );
 }
@@ -1038,77 +1038,77 @@ function SidebarSystemActions({
 
   return (
     <>
-    <div
-      className={cn(
-        "shrink-0 flex flex-col",
-        "border-t border-current/10",
-        "py-1",
-      )}
-    >
-      <span
+      <div
         className={cn(
-          "px-5 pt-0.5 pb-0.5",
-          "font-sans text-display text-xs tracking-[0.12em] text-text-tertiary",
-          collapsed && "lg:hidden",
+          "shrink-0 flex flex-col",
+          "border-t border-current/10",
+          "py-1",
         )}
       >
-        {t.app.system}
-      </span>
+        <span
+          className={cn(
+            "px-5 pt-0.5 pb-0.5",
+            "font-sans text-display text-xs tracking-[0.12em] text-text-tertiary",
+            collapsed && "lg:hidden",
+          )}
+        >
+          {t.app.system}
+        </span>
 
-      <div className={cn(collapsed && "lg:hidden")}>
-        <SidebarStatusStrip status={status} />
+        <div className={cn(collapsed && "lg:hidden")}>
+          <SidebarStatusStrip status={status} />
+        </div>
+
+        <GatewayDot collapsed={collapsed} status={status} tooltipWarmRef={tooltipWarmRef} />
+
+        <ul className="flex flex-col">
+          {items.map((item) => (
+            <SystemActionButton
+              key={item.action}
+              collapsed={collapsed}
+              disabled={isBusy && !(pendingAction === item.action || (activeAction === item.action && isRunning))}
+              tooltipWarmRef={tooltipWarmRef}
+              isPending={pendingAction === item.action}
+              isRunning={activeAction === item.action && isRunning && pendingAction !== item.action}
+              item={item}
+              onClick={() => handleClick(item.action)}
+            />
+          ))}
+        </ul>
       </div>
 
-      <GatewayDot collapsed={collapsed} status={status} tooltipWarmRef={tooltipWarmRef} />
+      <ConfirmDialog
+        cancelLabel={t.common.cancel}
+        confirmLabel={sharedGateway ? "Restart all" : t.status.restartGateway}
+        description={
+          sharedGateway
+            ? sharedGatewayRestartDescription(sharedGateway)
+            : (t.status.restartGatewayConfirmMessage ??
+              "This restarts the Hermes gateway process. Connected channels and active sessions will reconnect afterward.")
+        }
+        loading={pendingAction === "restart"}
+        onCancel={() => setRestartConfirmOpen(false)}
+        onConfirm={confirmRestart}
+        open={restartConfirmOpen}
+        title={
+          sharedGateway
+            ? "Restart the shared gateway?"
+            : (t.status.restartGatewayConfirmTitle ?? `${t.status.restartGateway}?`)
+        }
+      />
 
-      <ul className="flex flex-col">
-        {items.map((item) => (
-          <SystemActionButton
-            key={item.action}
-            collapsed={collapsed}
-            disabled={isBusy && !(pendingAction === item.action || (activeAction === item.action && isRunning))}
-            tooltipWarmRef={tooltipWarmRef}
-            isPending={pendingAction === item.action}
-            isRunning={activeAction === item.action && isRunning && pendingAction !== item.action}
-            item={item}
-            onClick={() => handleClick(item.action)}
-          />
-        ))}
-      </ul>
-    </div>
-
-    <ConfirmDialog
-      cancelLabel={t.common.cancel}
-      confirmLabel={sharedGateway ? "Restart all" : t.status.restartGateway}
-      description={
-        sharedGateway
-          ? sharedGatewayRestartDescription(sharedGateway)
-          : (t.status.restartGatewayConfirmMessage ??
-            "This restarts the Hermes gateway process. Connected channels and active sessions will reconnect afterward.")
-      }
-      loading={pendingAction === "restart"}
-      onCancel={() => setRestartConfirmOpen(false)}
-      onConfirm={confirmRestart}
-      open={restartConfirmOpen}
-      title={
-        sharedGateway
-          ? "Restart the shared gateway?"
-          : (t.status.restartGatewayConfirmTitle ?? `${t.status.restartGateway}?`)
-      }
-    />
-
-    <ConfirmDialog
-      cancelLabel={t.common.cancel}
-      confirmLabel={t.status.updateHermesConfirmNow ?? "Update now"}
-      description={
-        updateConfirmChecking ? t.common.loading : updateConfirmDescription
-      }
-      loading={pendingAction === "update" || updateConfirmChecking}
-      onCancel={() => setUpdateConfirmOpen(false)}
-      onConfirm={confirmUpdate}
-      open={updateConfirmOpen}
-      title={t.status.updateHermesConfirmTitle ?? `${t.status.updateHermes}?`}
-    />
+      <ConfirmDialog
+        cancelLabel={t.common.cancel}
+        confirmLabel={t.status.updateHermesConfirmNow ?? "Update now"}
+        description={
+          updateConfirmChecking ? t.common.loading : updateConfirmDescription
+        }
+        loading={pendingAction === "update" || updateConfirmChecking}
+        onCancel={() => setUpdateConfirmOpen(false)}
+        onConfirm={confirmUpdate}
+        open={updateConfirmOpen}
+        title={t.status.updateHermesConfirmTitle ?? `${t.status.updateHermes}?`}
+      />
     </>
   );
 }
