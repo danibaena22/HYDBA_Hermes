@@ -1,4 +1,4 @@
-name: HYDBA Build and Publish
+name: HYDBA Build and Deploy
 
 on:
   push:
@@ -48,3 +48,21 @@ jobs:
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-publish
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
+
+    steps:
+      - name: Deploy HYDBA Hermes to Kubernetes
+        run: |
+          kubectl -n hermes set image deployment/hermes-gateway \
+            hermes=ghcr.io/danibaena22/hydba-hermes:${{ github.sha }}
+
+      - name: Wait for Kubernetes rollout
+        run: |
+          kubectl -n hermes rollout status deployment/hermes-gateway \
+            --timeout=300s
